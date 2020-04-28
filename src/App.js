@@ -1,4 +1,4 @@
-import React, { useReducer } from "react";
+import React, { useReducer, useState } from "react";
 import "./App.css";
 
 const reducer = (state, action) => {
@@ -10,7 +10,11 @@ const reducer = (state, action) => {
       return { ...state, counter: state.counter - 1, error: null };
     }
     case "INCREMENT_BY_N": {
-      return { ...state, counter: state.counter + action.n, error: null };
+      return {
+        ...state,
+        counter: state.counter + Number(action.n),
+        error: null
+      };
     }
     default: {
       return { ...state, error: true };
@@ -29,6 +33,7 @@ const initialState = {
 
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
+  const [n, setN] = useState(0);
   return (
     <div className="App">
       <header className="App-header">
@@ -47,13 +52,16 @@ function App() {
         >
           Decrement
         </button>
-        <button
-          onClick={() => {
-            dispatch(incrementByN(2));
-          }}
-        >
-          Increment By 2
-        </button>
+        <div>
+          <input onChange={e => setN(e.target.value)} />
+          <button
+            onClick={() => {
+              dispatch(incrementByN(n));
+            }}
+          >
+            Increment By n
+          </button>
+        </div>
       </header>
     </div>
   );
