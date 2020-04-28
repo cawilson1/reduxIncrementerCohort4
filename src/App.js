@@ -12,10 +12,11 @@ import { CreateStore } from "./store/CreateStore";
 function App() {
   const [n, setN] = useState(0);
   const store = CreateStore(reducer);
+  console.log("counter", store.state);
   return (
     <div className="App">
       <header className="App-header">
-        {store.state.counter}
+        {store.state.incrementers.counter}
         <button
           onClick={() => {
             store.dispatch({ type: INCREMENT_COUNTER });
