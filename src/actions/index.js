@@ -10,3 +10,8 @@ export function incrementByN(n) {
 export function decrementByN(n) {
   return { type: DECREMENT_BY_N, n };
 }
+
+const ALLOW_USER_INPUT = "ALLOW_USER_INPUT";
+export function allowUserInput(bool) {
+  return { type: ALLOW_USER_INPUT, allowed: !bool };
+}

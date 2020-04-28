@@ -24,17 +24,23 @@ const incrementers = (state = { counter: 0 }, action) => {
   }
 };
 
-// export const reducer = (
-//   state = {
-//     counter: 0
-//   },
-//   action
-// ) => {
+const allowers = (state = { allowed: true }, action) => {
+  switch (action.type) {
+    case "ALLOW_USER_INPUT":
+      return {
+        ...state,
+        allowed: !state.allowed
+      };
+    default:
+      return { ...state };
+  }
+};
 
-// };
-
+//runs each of these every time.
+//if, for ex, state.allowers is undefined, it assigns state
 export const reducer = (state = {}, action) => {
   return {
-    incrementers: incrementers(state.incrementers, action)
+    incrementers: incrementers(state.incrementers, action),
+    allowers: allowers(state.allowers, action)
   };
 };

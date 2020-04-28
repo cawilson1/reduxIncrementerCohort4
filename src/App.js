@@ -4,7 +4,8 @@ import {
   INCREMENT_COUNTER,
   DECREMENT_COUNTER,
   incrementByN,
-  decrementByN
+  decrementByN,
+  allowUserInput
 } from "./actions";
 import { reducer } from "./reducers";
 import { CreateStore } from "./store/CreateStore";
@@ -12,7 +13,7 @@ import { CreateStore } from "./store/CreateStore";
 function App() {
   const [n, setN] = useState(0);
   const store = CreateStore(reducer);
-  console.log("counter", store.state);
+  console.log("state", store.state);
   return (
     <div className="App">
       <header className="App-header">
@@ -34,6 +35,7 @@ function App() {
         <div>
           <input onChange={e => setN(e.target.value)} />
           <button
+            disabled={!store.state.allowers.allowed}
             onClick={() => {
               store.dispatch(incrementByN(n));
             }}
@@ -41,6 +43,7 @@ function App() {
             Increment By n
           </button>{" "}
           <button
+            disabled={!store.state.allowers.allowed}
             onClick={() => {
               store.dispatch(decrementByN(n));
             }}
@@ -48,6 +51,18 @@ function App() {
             Decrement By n
           </button>
         </div>
+        <label> Allow Incrementing By n:</label>
+        <input
+          type="checkbox"
+          defaultChecked={store.state.allowers.allowed}
+          onChange={() => {
+            store.dispatch(allowUserInput(!store.state.allowers.allowed));
+          }}
+        />
+        <p style={{ color: "white" }}>
+          Is Allowed to increment by n? <br />{" "}
+          {String(store.state.allowers.allowed)}
+        </p>
       </header>
     </div>
   );
