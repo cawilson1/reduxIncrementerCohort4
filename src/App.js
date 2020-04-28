@@ -1,5 +1,11 @@
 import React, { useReducer, useState } from "react";
 import "./App.css";
+import {
+  INCREMENT_COUNTER,
+  DECREMENT_COUNTER,
+  incrementByN,
+  decrementByN
+} from "./actions";
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -29,13 +35,6 @@ const reducer = (state, action) => {
   }
 };
 
-function incrementByN(n) {
-  return { type: "INCREMENT_BY_N", n };
-}
-function decrementByN(n) {
-  return { type: "DECREMENT_BY_N", n };
-}
-
 const initialState = {
   counter: 0,
   error: null
@@ -50,14 +49,14 @@ function App() {
         {state.counter}
         <button
           onClick={() => {
-            dispatch({ type: "INCREMENT_COUNTER" });
+            dispatch({ type: INCREMENT_COUNTER });
           }}
         >
           Increment
         </button>
         <button
           onClick={() => {
-            dispatch({ type: "DECREMENT_COUNTER" });
+            dispatch({ type: DECREMENT_COUNTER });
           }}
         >
           Decrement
