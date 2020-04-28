@@ -1,16 +1,17 @@
 import React, { useReducer } from "react";
-import logo from "./logo.svg";
 import "./App.css";
 
 const reducer = (state, action) => {
-  if (action.type === "INCREMENT_COUNTER") {
-    return { ...state, counter: state.counter + 1, error: null };
-  }
-  if (action.type === "DECREMENT_COUNTER") {
-    return { ...state, counter: state.counter - 1, error: null };
-  }
-  if (action.type === "SET_ERROR") {
-    return { ...state, error: true };
+  switch (action.type) {
+    case "INCREMENT_COUNTER": {
+      return { ...state, counter: state.counter + 1, error: null };
+    }
+    case "DECREMENT_COUNTER": {
+      return { ...state, counter: state.counter - 1, error: null };
+    }
+    default: {
+      return { ...state, error: true };
+    }
   }
 };
 
