@@ -1,4 +1,4 @@
-import React, { useReducer, useState } from "react";
+import React, { useState } from "react";
 import "./App.css";
 import {
   INCREMENT_COUNTER,
@@ -7,29 +7,25 @@ import {
   decrementByN
 } from "./actions";
 import { reducer } from "./reducers";
-
-const initialState = {
-  counter: 0,
-  error: null
-};
+import { CreateStore } from "./store/CreateStore";
 
 function App() {
-  const [state, dispatch] = useReducer(reducer, initialState);
   const [n, setN] = useState(0);
+  const store = CreateStore(reducer);
   return (
     <div className="App">
       <header className="App-header">
-        {state.counter}
+        {store.state.counter}
         <button
           onClick={() => {
-            dispatch({ type: INCREMENT_COUNTER });
+            store.dispatch({ type: INCREMENT_COUNTER });
           }}
         >
           Increment
         </button>
         <button
           onClick={() => {
-            dispatch({ type: DECREMENT_COUNTER });
+            store.dispatch({ type: DECREMENT_COUNTER });
           }}
         >
           Decrement
@@ -38,14 +34,14 @@ function App() {
           <input onChange={e => setN(e.target.value)} />
           <button
             onClick={() => {
-              dispatch(incrementByN(n));
+              store.dispatch(incrementByN(n));
             }}
           >
             Increment By n
           </button>{" "}
           <button
             onClick={() => {
-              dispatch(decrementByN(n));
+              store.dispatch(decrementByN(n));
             }}
           >
             Decrement By n
