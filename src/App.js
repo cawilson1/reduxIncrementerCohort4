@@ -16,6 +16,13 @@ const reducer = (state, action) => {
         error: null
       };
     }
+    case "DECREMENT_BY_N": {
+      return {
+        ...state,
+        counter: state.counter - Number(action.n),
+        error: null
+      };
+    }
     default: {
       return { ...state, error: true };
     }
@@ -24,6 +31,9 @@ const reducer = (state, action) => {
 
 function incrementByN(n) {
   return { type: "INCREMENT_BY_N", n };
+}
+function decrementByN(n) {
+  return { type: "DECREMENT_BY_N", n };
 }
 
 const initialState = {
@@ -60,6 +70,13 @@ function App() {
             }}
           >
             Increment By n
+          </button>{" "}
+          <button
+            onClick={() => {
+              dispatch(decrementByN(n));
+            }}
+          >
+            Decrement By n
           </button>
         </div>
       </header>
